@@ -192,9 +192,17 @@ export default class CosmosAPI {
     ).amount
   }
 
-  async getValidatorInfoPage() {
-    return await this.axios(`https://graphql.bitcanna.io/api/rest/supply/bonded`)
+  async getTaxRate() {
+    return await this.query(`enci/charity/v1beta1/taxrate`)
   }
+
+  async getBurnRate() {
+    return await this.query(`enci/charity/v1beta1/burnrate`)
+  }
+
+ // async getValidatorInfoPage() {
+ //   return await this.axios(`https://graphql.bitcanna.io/api/rest/supply/bonded`)
+ // }
 
   async getBcnaValue() {
     return await this.axios(`https://payment.bitcanna.io/api/price/usd`)

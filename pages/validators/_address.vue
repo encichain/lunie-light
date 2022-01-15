@@ -211,6 +211,7 @@ export default {
         ({ validator: { operatorAddress } }) => operatorAddress === this.address
       )
     },
+    // This is used calculates the validator estimated APR in the validator profile page
     validatorApr() {
       // const commission = this.validator.commission * 100 // this.validator.commission = 0.1
       // const finalApr = this.bcnaApr - commission

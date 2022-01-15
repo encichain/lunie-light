@@ -1,3 +1,5 @@
+/* eslint-disable*/
+
 import { keyBy, uniqBy } from 'lodash'
 import network from '~/common/network'
 // import DataSource from '~/apis/cosmos-source-0.39'
@@ -25,6 +27,8 @@ export const state = () => ({
   transactionsLoading: false,
   moreTransactionsAvailable: true,
   api: undefined,
+  taxRate: [],
+  taxRateLoaded: false,
   validatorInfoPage: [],
   bcnaValue: [],
   bcnaValueLoaded: false,
@@ -80,6 +84,7 @@ export const actions = {
       dispatch('getGovernanceOverview'),
       dispatch('getValidatorInfoPage'),
       dispatch('getBcnaApr'),
+      dispatch('getTaxRate')
     ]
     await Promise.all(calls)
   },
@@ -133,13 +138,15 @@ export const actions = {
   async getBalances({ commit, state: { api } }, { address, currency }) {
     try {
       const balances = await api.getBalances(address, currency, network)
+      /*
       const returnBcnaBalance = []
       balances.forEach(function (item) {
         if (item.id === 'BCNA') {
           returnBcnaBalance.push(item)
         }
       })
-      commit('setBalances', returnBcnaBalance)
+      */
+      commit('setBalances', balances)
       commit('setBalancesLoaded', true)
     } catch (err) {
       commit(
@@ -179,6 +186,22 @@ export const actions = {
         {
           type: 'danger',
           message: 'Getting ConvertBcna failed:' + err.message,
+        },
+        { root: true }
+      )
+    }
+  },
+  async getTaxRate({ commit, state: { api } }) {
+    try{
+      const tax_Rate = await api.getTaxRate()
+      commit('setTaxRate', tax_Rate)
+      commit('setTaxRateLoaded', true)
+    } catch (err) {
+      commit(
+        'notifications/add',
+        {
+          type: 'danger',
+          message: 'Getting taxRate failed:' + err.message,
         },
         { root: true }
       )

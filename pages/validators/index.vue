@@ -43,10 +43,10 @@
       <div>
         <h4 class="icon">
           <img src="icon/tokens.png" />
-          &ensp; Bonded coins
+          &ensp; Tax Rate (%)
         </h4>
         <p class="text-block">
-          {{ finalBonded | bigFigureOrShortDecimals }}
+          {{ finaltaxRate | bigFigureOrShortDecimals }}
         </p>
       </div>
     </div>
@@ -83,6 +83,7 @@ export default {
       'delegationsLoaded',
       'rewards',
       'validatorInfoPage',
+      'taxRate',
     ]),
     filteredValidators() {
       if (this.searchTerm) {
@@ -108,6 +109,10 @@ export default {
     finalBonded() {
       const boundedRound = this.validatorInfoPage.bonded_tokens / 1000000
       return boundedRound.toFixed(0)
+    },
+    finaltaxRate() {
+      const taxRatePercent = this.taxRate.tax_rate * 100
+      return taxRatePercent
     },
     countValidators() {
       const countVal = Object.keys(this.sortedValidators).length
