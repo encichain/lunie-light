@@ -2,7 +2,7 @@ export default {
   id: 'cosmos-hub-testnet', // DEPRECATE, only used for Lunie extension, NOT CHAIN ID
   name: 'Encichain',
   description: 'Encichain is a decentralized philanthropic blockchain',
-  logo: `homescreen400.png`,
+  logo: `encilogo.png`,
   website: 'https://example.com',
   apiURL: 'http://localhost:1317', // use `npx lcp --proxyUrl http://34.123.30.100:1317`
   rpcURL: 'http://localhost:26657',
@@ -12,7 +12,7 @@ export default {
       viewDenom: 'ENCI',
       chainDenom: 'uenci',
       chainToViewConversionFactor: 1e-6,
-      icon: `/currencies/muon.png`,
+      icon: `/_nuxt/assets/images/currencies/enci.png`,
     },
   ],
   addressPrefix: 'enci',

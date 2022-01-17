@@ -280,8 +280,26 @@ export default class CosmosAPI {
 
   async getInflation() {
     const rate = await this.query(`cosmos/mint/v1beta1/inflation`)
-    const params = await this.query(`cosmos/mint/v1beta1/params`)
-    const annual_provisions = await this.query(`cosmos/mint/v1beta1/annual_provisions`)
+    //const annual_provisions = await this.query(`cosmos/mint/v1beta1/annual_provisions`)
+
+    return BigNumber(rate.inflation)
+  }
+
+  // Nominal APR calculated by formula: [Inflation * (1 - Community Tax)] / (Bonded tokens / Total Supply)
+  async getEnciApr() {
+      const [
+        inflationRes, 
+        distributionRes, 
+        totalBondedRes, 
+        totalSupply,
+      ] = await Promise.all([
+      this.getInflation(),
+      this.query(`cosmos/distribution/v1beta1/params`),
+      this.query(`cosmos/staking/v1beta1/pool`),
+      this.getStakingSupply()
+    ])
+
+    return (inflationRes * (1 - distributionRes.params.community_tax) / (BigNumber(totalBondedRes.pool.bonded_tokens) / totalSupply))
   }
 
   async getDetailedVotes(proposal, tallyParams, depositParams) {

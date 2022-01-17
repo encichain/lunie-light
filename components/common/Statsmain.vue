@@ -23,7 +23,7 @@
           <img src="icon/apr.png" />
           &ensp; APR
         </h4>
-        <p class="text-block">{{ bcnaApr | bigFigureOrShortDecimals }} %</p>
+        <p class="text-block">{{ enciApr | percent }}</p>
       </div>
     </div>
   </div>
@@ -31,12 +31,13 @@
 
 <script>
 import { mapState } from 'vuex'
-import { bigFigureOrShortDecimals } from '~/common/numbers'
+import { percent, bigFigureOrShortDecimals } from '~/common/numbers'
 
 export default {
   name: `Statsmain`,
   filters: {
     bigFigureOrShortDecimals,
+    percent,
   },
   props: {
     balance: {
@@ -49,7 +50,7 @@ export default {
   },
   computed: {
     ...mapState([`session`]),
-    ...mapState(`data`, ['bcnaApr', 'bcnaValue', 'rewards']),
+    ...mapState(`data`, ['bcnaApr', 'bcnaValue', 'rewards', 'enciApr']),
     bcnaToFiat() {
       // console.log(this.balance)
       return this.balance[0].total * this.bcnaValue

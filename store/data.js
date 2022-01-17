@@ -34,6 +34,8 @@ export const state = () => ({
   bcnaValueLoaded: false,
   bcnaApr: [],
   bcnaAprLoaded: false,
+  enciApr: [],
+  enciAprLoaded: false,
 })
 
 export const mutations = {
@@ -84,7 +86,8 @@ export const actions = {
       dispatch('getGovernanceOverview'),
       dispatch('getValidatorInfoPage'),
       dispatch('getBcnaApr'),
-      dispatch('getTaxRate')
+      dispatch('getTaxRate'),
+      dispatch('getEnciApr')
     ]
     await Promise.all(calls)
   },
@@ -114,7 +117,8 @@ export const actions = {
         dispatch('getBalances', { address, currency }),
         dispatch('getRewards', { address, currency }),
         // dispatch('getBcnaValue'),
-        dispatch('getBcnaApr')
+        dispatch('getBcnaApr'),
+        dispatch('getEnciApr')
       )
     }
     await Promise.all(calls)
@@ -196,6 +200,22 @@ export const actions = {
       const tax_Rate = await api.getTaxRate()
       commit('setTaxRate', tax_Rate)
       commit('setTaxRateLoaded', true)
+    } catch (err) {
+      commit(
+        'notifications/add',
+        {
+          type: 'danger',
+          message: 'Getting taxRate failed:' + err.message,
+        },
+        { root: true }
+      )
+    }
+  },
+  async getEnciApr({ commit, state: { api } }) {
+    try{
+      const enciApr = await api.getEnciApr()
+      commit('setEnciApr', enciApr)
+      commit('setEnciAprLoaded', true)
     } catch (err) {
       commit(
         'notifications/add',
