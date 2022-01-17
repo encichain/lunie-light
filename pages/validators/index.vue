@@ -46,7 +46,7 @@
           &ensp; Tax Rate (%)
         </h4>
         <p class="text-block">
-          {{ finaltaxRate | bigFigureOrShortDecimals }}
+          {{ finaltaxRate | percent }}
         </p>
       </div>
     </div>
@@ -63,11 +63,12 @@
 
 <script>
 import { mapState } from 'vuex'
-import { bigFigureOrShortDecimals } from '~/common/numbers'
+import { percent, bigFigureOrShortDecimals } from '~/common/numbers'
 
 export default {
   name: `PageValidators`,
   filters: {
+    percent,
     bigFigureOrShortDecimals,
   },
   data: () => ({
@@ -111,7 +112,7 @@ export default {
       return boundedRound.toFixed(0)
     },
     finaltaxRate() {
-      const taxRatePercent = this.taxRate.tax_rate * 100
+      const taxRatePercent = this.taxRate.tax_rate
       return taxRatePercent
     },
     countValidators() {
