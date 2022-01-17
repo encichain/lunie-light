@@ -22,7 +22,7 @@
         <p>
           Use this software at your own risk. Never enter your seed phrase into
           untrusted software. Beware of phishing scams and spoof sites. Bookmark
-          <a href="https://wallet.bitcanna.io">wallet.bitcanna.io</a>
+          <a href="https://wallet.enci.app">wallet.enci.app</a>
           to be safe! <br />
           Have a nice day <span>✌🏻</span>
         </p>
@@ -170,12 +170,12 @@ export default {
 }
 
 .session .material-icons.circle.back {
-  color: var(--green-1000);
+  color: #ffbf00;
   border-radius: 50%;
   padding: 0.25rem;
   cursor: pointer;
   font-size: var(--text-base);
-  border: 1px solid var(--green-1000);
+  border: 1px solid #ffbf00;
 }
 
 .disclaimer {

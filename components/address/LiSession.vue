@@ -93,7 +93,7 @@ export default {
 
 .icon i {
   font-size: 1.25rem;
-  color: var(--green-1000);
+  color: #ffbf00;
 }
 
 .title {
@@ -121,7 +121,7 @@ export default {
 }
 
 .material-icons.circle {
-  color: var(--green-1000);
+  color: #ffbf00;
   border-radius: 50%;
   padding: 0.5rem;
 }

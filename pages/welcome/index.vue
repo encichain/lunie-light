@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Welcome to BitCanna</h1>
+    <h1>Welcome to Enci</h1>
     <h2>{{ network.description }}</h2>
     <div class="session-list">
       <AddressLiSession
@@ -86,7 +86,7 @@ h1 {
   font-size: var(--text-3xl);
   text-align: center;
   padding-bottom: 1.5rem;
-  color: var(--green-1000);
+  color: #ffbf00;
 }
 
 h2 {

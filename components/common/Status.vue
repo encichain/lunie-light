@@ -34,7 +34,7 @@ export default {
 .status.passed,
 .status.active {
   color: var(--white);
-  border: 1px solid var(--green-1000);
+  border: 1px solid #ffbf00;
 }
 
 .status.rejected {

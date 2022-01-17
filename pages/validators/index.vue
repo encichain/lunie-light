@@ -213,7 +213,7 @@ export default {
 }
 
 .toggle-button.active {
-  background: var(--green-1000);
+  background: #ffbf00;
   border: none;
 }
 
@@ -230,7 +230,7 @@ export default {
 }
 
 .toggles .toggle-button.active:hover:not(:disabled) {
-  background: var(--green-1000);
+  background: #ffbf00;
 }
 
 .toggles .toggle-button.secondary:hover:not(:disabled) {

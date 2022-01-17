@@ -116,7 +116,7 @@ a.tooltip span {
   display: none;
 }
 a.tooltip:hover span {
-  border: var(--green-1000) 2px dotted;
+  border: #ffbf00 2px dotted;
   padding: 5px 20px 5px;
   display: block;
   z-index: 100;

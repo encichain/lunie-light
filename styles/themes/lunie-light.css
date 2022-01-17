@@ -1,8 +1,8 @@
 .lunie-light {
   /* theme colors */
-  --primary: var(--green-1000);
+  --primary: #ffbf00;
   --primary-hover: var(--green-1100);
-  --link: var(--green-1000);
+  --link: #ffbf00;
   --link-hover: var(--green-1100);
 
   /* background-colors */
@@ -23,7 +23,7 @@
   --bc: var(--gray-500);
   --bc-dim: var(--gray-1200);
   --input-bc: var(--gray-600);
-  --success: var(--green-1000);
+  --success: #ffbf00;
   --warning: var(--orange-400);
   --danger: var(--red-600);
   --info: var(--pink-900);

@@ -122,7 +122,7 @@ export default {
 }
 
 .app-menu .app-menu-item i {
-  color: var(--green-1000);
+  color: #ffbf00;
 }
 
 .app-menu .app-menu-item--link:hover {

@@ -68,7 +68,7 @@ h4 {
   justify-content: center;
   color: var(--white);
   font-size: var(--text-base);
-  border: 2px solid var(--green-1000);
+  border: 2px solid #ffbf00;
 }
 
 .icon-button:hover {
@@ -77,8 +77,8 @@ h4 {
 }
 
 .button.menu-button {
-  background: rgb(0, 183, 134);
-  box-shadow: 0 0 2px 0 rgb(0, 183, 134);
+  background: rgb(255, 191, 0);
+  box-shadow: 0 0 2px 0 rgb(255, 191, 0);
   border: 1px;
 }
 

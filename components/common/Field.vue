@@ -131,7 +131,7 @@ export default {
 }
 
 .add-on {
-  background: var(--green-1000);
+  background: #ffbf00;
   color: var(--white);
   font-size: var(--text-sm);
   padding: 0 0.5rem;
