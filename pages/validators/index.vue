@@ -26,15 +26,6 @@
     <div class="data-row">
       <div>
         <h4 class="icon">
-          <img src="icon/height.png" />
-          &ensp; Height
-        </h4>
-        <p class="text-block">
-          {{ validatorInfoPage.height }}
-        </p>
-      </div>
-      <div>
-        <h4 class="icon">
           <img src="icon/validator.png" />
           &ensp; Validators
         </h4>
@@ -47,6 +38,15 @@
         </h4>
         <p class="text-block">
           {{ finaltaxRate | percent }}
+        </p>
+      </div>
+      <div>
+        <h4 class="icon">
+          <img src="icon/height.png" />
+          &ensp; Charity Burn Rate
+        </h4>
+        <p class="text-block">
+          {{ burnRate.burn_rate | percent }}
         </p>
       </div>
     </div>
@@ -85,6 +85,7 @@ export default {
       'rewards',
       'validatorInfoPage',
       'taxRate',
+      'burnRate',
     ]),
     filteredValidators() {
       if (this.searchTerm) {

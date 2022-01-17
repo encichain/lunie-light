@@ -29,6 +29,8 @@ export const state = () => ({
   api: undefined,
   taxRate: [],
   taxRateLoaded: false,
+  burnRate: [],
+  burnRateLoaded: false,
   validatorInfoPage: [],
   bcnaValue: [],
   bcnaValueLoaded: false,
@@ -87,6 +89,7 @@ export const actions = {
       dispatch('getValidatorInfoPage'),
       dispatch('getBcnaApr'),
       dispatch('getTaxRate'),
+      dispatch('getBurnRate'),
       dispatch('getEnciApr')
     ]
     await Promise.all(calls)
@@ -211,6 +214,22 @@ export const actions = {
       )
     }
   },
+  async getBurnRate({ commit, state: { api }}) {
+    try{
+      const burn_rate = await api.getBurnRate()
+      commit('setBurnRate', burn_rate)
+      commit('setBurnRateLoaded', true)
+    } catch (err) {
+      commit(
+        'notifications/add',
+        {
+          type: 'danger',
+          message: 'Getting burnRate failed:' + err.message,
+        },
+        { root: true }
+      )
+    }
+  },
   async getEnciApr({ commit, state: { api } }) {
     try{
       const enciApr = await api.getEnciApr()
@@ -221,7 +240,7 @@ export const actions = {
         'notifications/add',
         {
           type: 'danger',
-          message: 'Getting taxRate failed:' + err.message,
+          message: 'Getting Enci APR failed:' + err.message,
         },
         { root: true }
       )
