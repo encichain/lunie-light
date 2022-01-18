@@ -8,7 +8,7 @@
           &ensp; Wallet value
         </h4>
         <p v-for="item in balance" :key="item.id" class="text-block">
-          $ {{ bcnaToFiat | bigFigureOrShortDecimals }}
+          $ {{ bigFigureOrShortDecimals }}
         </p>
       </div>
       <div>
@@ -16,7 +16,7 @@
           <img src="icon/tokens.png" />
           &ensp; ENCI price
         </h4>
-        <p class="text-block">$ {{ bcnaValue }}</p>
+        <p class="text-block">$ {{ bigFigureOrShortDecimals }}</p>
       </div>
       <div>
         <h4 class="icon">
@@ -50,15 +50,11 @@ export default {
   },
   computed: {
     ...mapState([`session`]),
-    ...mapState(`data`, ['bcnaApr', 'bcnaValue', 'rewards', 'enciApr']),
-    bcnaToFiat() {
-      // console.log(this.balance)
-      return this.balance[0].total * this.bcnaValue
-    },
+    ...mapState(`data`, ['rewards', 'enciApr']),
   },
   mounted() {
     this.loadRewards()
-    this.loadBlance(this.session.address)
+    this.loadBalance(this.session.address)
     setInterval(() => {
       this.loadRewards(this.session.address)
     }, 10000)
@@ -68,10 +64,9 @@ export default {
       // this.$store.dispatch('data/getBcnaValue')
       this.$store.dispatch('data/refreshPortfolio')
     },
-    loadBlance(address) {
+    loadBalance(address) {
       // this.$store.dispatch('data/getBcnaValue')
       this.$store.dispatch('data/getBalances', { address })
-      this.$store.dispatch('data/getBcnaValue')
     },
   },
 }

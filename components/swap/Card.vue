@@ -10,8 +10,7 @@
         requires 2 steps.
       </div>
       <div class="paragraph content">
-        Before you start make sure you have your Enci wallet (<span
-          class="bold"
+        Before you start make sure you have your Enci wallet (<span class="bold"
           >old</span
         >
         blockchain) open to send your coins.
