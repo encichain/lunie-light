@@ -81,7 +81,7 @@
         <div>
           <h4>Rewards</h4>
           <span>
-            {{ validatorApr.toFixed(2) }}%
+            {{ validatorApr | percent }}
             <!-- {{ validator.expectedReturns | percent }} -->
             <span class="note">(APR)</span>
           </span>
@@ -183,7 +183,7 @@ export default {
       'delegations',
       'rewards',
       'validatorsLoaded',
-      'bcnaApr',
+      'enciApr',
     ]),
     validator() {
       return this.validators.find(
@@ -216,7 +216,7 @@ export default {
       // const commission = this.validator.commission * 100 // this.validator.commission = 0.1
       // const finalApr = this.bcnaApr - commission
       const rewardFactor = 1 - this.validator.commission
-      const finalApr = this.bcnaApr * rewardFactor
+      const finalApr = this.enciApr * rewardFactor
       return finalApr
     },
   },

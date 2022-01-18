@@ -32,8 +32,6 @@ export const state = () => ({
   burnRate: [],
   burnRateLoaded: false,
   validatorInfoPage: [],
-  bcnaApr: [],
-  bcnaAprLoaded: false,
   enciApr: [],
   enciAprLoaded: false,
 })
@@ -85,7 +83,6 @@ export const actions = {
       dispatch('getProposals'),
       dispatch('getGovernanceOverview'),
       dispatch('getValidatorInfoPage'),
-      dispatch('getBcnaApr'),
       dispatch('getTaxRate'),
       dispatch('getBurnRate'),
       dispatch('getEnciApr')
@@ -117,7 +114,6 @@ export const actions = {
       calls.push(
         dispatch('getBalances', { address, currency }),
         dispatch('getRewards', { address, currency }),
-        dispatch('getBcnaApr'),
         dispatch('getEnciApr')
       )
     }
@@ -158,22 +154,6 @@ export const actions = {
         {
           type: 'danger',
           message: 'Getting balances failed:' + err.message,
-        },
-        { root: true }
-      )
-    }
-  },
-  async getBcnaApr({ commit, state: { api } }) {
-    try {
-      const apr = await api.getBcnaApr()
-      commit('setBcnaApr', Number(apr.data.cmc_supply_apr[0].apr).toFixed(1))
-      commit('setBcnaAprLoaded', true)
-    } catch (err) {
-      commit(
-        'notifications/add',
-        {
-          type: 'danger',
-          message: 'Getting APR failed:' + err.message,
         },
         { root: true }
       )

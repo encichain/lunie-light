@@ -207,10 +207,6 @@ export default class CosmosAPI {
   async getBcnaInflation() {
     return await this.axios(`https://graphql.bitcanna.io/api/rest/supply/inflation`)
   }
-  async getBcnaApr() {
-    // return await this.axios(`https://api.stakely.io/stats`)
-    return await this.axios(`https://graphql.bitcanna.io/api/rest/price/apr`)
-  }
 
   async getValidator(address) {
     await this.dataReady
