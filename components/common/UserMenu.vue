@@ -83,6 +83,6 @@ h4 {
 }
 
 .button.menu-button.secondary:hover:not(:disabled) {
-  background: rgb(10, 114, 85);
+  background: rgb(255, 145, 0);
 }
 </style>

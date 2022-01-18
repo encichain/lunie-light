@@ -1,9 +1,9 @@
 .lunie-light {
   /* theme colors */
   --primary: #ffbf00;
-  --primary-hover: var(--green-1100);
+  --primary-hover: #ff9100;
   --link: #ffbf00;
-  --link-hover: var(--green-1100);
+  --link-hover: #ff9100;
 
   /* background-colors */
   --app-fg: var(--gray-1200);

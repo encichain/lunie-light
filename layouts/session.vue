@@ -23,8 +23,7 @@
           Use this software at your own risk. Never enter your seed phrase into
           untrusted software. Beware of phishing scams and spoof sites. Bookmark
           <a href="https://wallet.enci.app">wallet.enci.app</a>
-          to be safe! <br />
-          Have a nice day <span>✌🏻</span>
+          to be safe!
         </p>
       </div>
     </div>
@@ -71,15 +70,6 @@ export default {
   top: 30px;
   left: 30px;
   width: 50px;
-}
-
-.session-layout-out .bg-image {
-  background: transparent url('../assets/images/bg_img.svg') 0% 0% no-repeat
-    padding-box;
-  background-size: 800px;
-  background-position: 20% 10%;
-  opacity: 1;
-  left: 50%;
 }
 
 @media screen and (max-width: 768px) {

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "Apache-2.0",
   "scripts": {
-    "dev": "nuxt",
+    "dev": "SET NODE_OPTIONS=--openssl-legacy-provider && nuxt",
     "analyze": "nuxt build -a",
     "build": "SET NODE_OPTIONS=--openssl-legacy-provider && nuxt build",
     "start": "SET NODE_OPTIONS=--openssl-legacy-provider && nuxt start",
