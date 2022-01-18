@@ -32,8 +32,6 @@ export const state = () => ({
   burnRate: [],
   burnRateLoaded: false,
   validatorInfoPage: [],
-  bcnaValue: [],
-  bcnaValueLoaded: false,
   bcnaApr: [],
   bcnaAprLoaded: false,
   enciApr: [],
@@ -119,7 +117,6 @@ export const actions = {
       calls.push(
         dispatch('getBalances', { address, currency }),
         dispatch('getRewards', { address, currency }),
-        // dispatch('getBcnaValue'),
         dispatch('getBcnaApr'),
         dispatch('getEnciApr')
       )
@@ -177,22 +174,6 @@ export const actions = {
         {
           type: 'danger',
           message: 'Getting APR failed:' + err.message,
-        },
-        { root: true }
-      )
-    }
-  },
-  async getBcnaValue({ commit, state: { api } }) {
-    try {
-      const bcnaValue = await api.getBcnaValue()
-      commit('setBcnaValue', bcnaValue.data.bitcanna.usd)
-      commit('setBcnaValueLoaded', true)
-    } catch (err) {
-      commit(
-        'notifications/add',
-        {
-          type: 'danger',
-          message: 'Getting ConvertBcna failed:' + err.message,
         },
         { root: true }
       )

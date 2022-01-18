@@ -8,7 +8,7 @@
           &ensp; Wallet value
         </h4>
         <p v-for="item in balance" :key="item.id" class="text-block">
-          $ {{ bigFigureOrShortDecimals }}
+          $ {{ 'NaN' | bigFigureOrShortDecimals }}
         </p>
       </div>
       <div>
@@ -16,7 +16,7 @@
           <img src="icon/tokens.png" />
           &ensp; ENCI price
         </h4>
-        <p class="text-block">$ {{ bigFigureOrShortDecimals }}</p>
+        <p class="text-block">$ {{ 'NaN' | bigFigureOrShortDecimals }}</p>
       </div>
       <div>
         <h4 class="icon">
@@ -61,11 +61,9 @@ export default {
   },
   methods: {
     loadRewards(address) {
-      // this.$store.dispatch('data/getBcnaValue')
       this.$store.dispatch('data/refreshPortfolio')
     },
     loadBalance(address) {
-      // this.$store.dispatch('data/getBcnaValue')
       this.$store.dispatch('data/getBalances', { address })
     },
   },

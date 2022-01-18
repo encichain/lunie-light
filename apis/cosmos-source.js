@@ -204,10 +204,6 @@ export default class CosmosAPI {
  //   return await this.axios(`https://graphql.bitcanna.io/api/rest/supply/bonded`)
  // }
 
-  async getBcnaValue() {
-    return await this.axios(`https://payment.bitcanna.io/api/price/usd`)
-  }
-
   async getBcnaInflation() {
     return await this.axios(`https://graphql.bitcanna.io/api/rest/supply/inflation`)
   }
