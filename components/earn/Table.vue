@@ -19,13 +19,13 @@
       </thead>
       <tbody>
         <tr>
-          <td class="cell">BCNA/ATOM</td>
+          <td class="cell">ENCI/ATOM</td>
           <td class="cell">
             <img src="icon/BCNA-Atom.svg" />
           </td>
           <td class="cell">1-7-14 days</td>
           <td class="cell">${{ tvlData572 | bigFigureOrShortDecimals }}</td>
-          <td class="cell">142% + BONUS BCNA</td>
+          <td class="cell">142% + BONUS ENCI</td>
           <td class="cell">
             <CommonButton
               :href="network.osmosAppUrl + '/pool/572'"
@@ -35,13 +35,13 @@
           </td>
         </tr>
         <tr>
-          <td class="cell">BCNA/OSMO</td>
+          <td class="cell">ENCI/OSMO</td>
           <td class="cell">
             <img src="icon/BCNA-Osmo.svg" width="80" height="45" />
           </td>
           <td class="cell">1-7-14 days</td>
           <td class="cell">${{ tvlData571 | bigFigureOrShortDecimals }}</td>
-          <td class="cell">163% + BONUS BCNA</td>
+          <td class="cell">163% + BONUS ENCI</td>
           <td class="cell">
             <CommonButton
               :href="network.osmosAppUrl + '/pool/571'"
@@ -72,7 +72,7 @@
       </thead>
       <tbody>
         <tr>
-          <td class="cell">BitCanna Delegate</td>
+          <td class="cell">Enci Delegate</td>
           <td class="cell">
             <img src="icon/BCNA-icon.svg" width="45" height="45" />
           </td>
@@ -93,7 +93,7 @@
           </td>
         </tr>
         <tr>
-          <td class="cell">BitCanna Validate</td>
+          <td class="cell">Enci Validate</td>
           <td class="cell">
             <img src="icon/BCNA-icon.svg" width="45" height="45" />
           </td>

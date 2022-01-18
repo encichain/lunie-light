@@ -1,5 +1,4 @@
 // Update version for using version 0.44.0 of the cosmos sdk / keplr
-// By @atmoner for Bitcanna 2021
 import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing'
 import {
   assertIsBroadcastTxSuccess,
@@ -311,7 +310,7 @@ async function unDelegateTokensBcna(
     validator,
     amount,
     fee,
-    'Undelegate from Bitcanna WebWallet'
+    'Undelegate from Enci WebWallet'
   )
   assertIsBroadcastTxSuccess(result)
   return result
@@ -396,7 +395,7 @@ async function voteTxBcna(sign, fromDel, proposalId, vote, fee, signingType) {
     proposalId,
     finalVote,
     fee,
-    'Voted from Bitcanna WebWallet'
+    'Voted from Enci WebWallet'
   )
   assertIsBroadcastTxSuccess(result)
   return result

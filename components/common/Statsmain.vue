@@ -14,7 +14,7 @@
       <div>
         <h4 class="icon">
           <img src="icon/tokens.png" />
-          &ensp; BCNA price
+          &ensp; ENCI price
         </h4>
         <p class="text-block">$ {{ bcnaValue }}</p>
       </div>

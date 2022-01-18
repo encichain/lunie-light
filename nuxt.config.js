@@ -11,7 +11,7 @@ export default {
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    title: 'Bitcanna Wallet',
+    title: 'Enci Wallet',
     htmlAttrs: {
       lang: 'en',
     },
@@ -22,7 +22,7 @@ export default {
         hid: 'description',
         name: 'description',
         content:
-          'The Cannabis Blockchain project which is powered by the Industry. BitCanna will provide a decentralized payment network for the legal cannabis industry.',
+          'Encichain is a decentralized philanthropic blockchain.',
       },
     ],
     link: [
@@ -125,6 +125,6 @@ export default {
 
   server: {
     // default: localhost
-    host: '0',
+    host: 'localhost',
   },
 }

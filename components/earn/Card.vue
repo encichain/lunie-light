@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h1>BCNA Earn</h1>
+    <h1>ENCI Earn</h1>
     <p>
-      BitCanna Earn displays the various methods to utilize your BCNA assets to
-      (potentially) earn additional income. <br />You can either lock your BCNA
-      in liquidity pools, or use your BCNA to secure the BitCanna network.
+      Enci Earn displays the various methods to utilize your ENCI assets to
+      (potentially) earn additional income. <br />You can either lock your ENCI
+      in liquidity pools, or use your ENCI to secure the Enci network.
     </p>
     <br />
     <p>

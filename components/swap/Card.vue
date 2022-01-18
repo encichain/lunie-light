@@ -4,13 +4,13 @@
     <CommonSteps :steps="steps" :active-step="step" />
     <CommonForm :submit="onSubmit" class="session-container">
       <div class="paragraph content">
-        It is mandatory to swap your BCNA coins from the
-        <span class="bold">old</span> BitCanna blockchain to the
+        It is mandatory to swap your ENCI coins from the
+        <span class="bold">old</span> Enci blockchain to the
         <span class="bold">new</span> blockchain. Swapping your coins only
         requires 2 steps.
       </div>
       <div class="paragraph content">
-        Before you start make sure you have your BitCanna wallet (<span
+        Before you start make sure you have your Enci wallet (<span
           class="bold"
           >old</span
         >
@@ -18,11 +18,11 @@
       </div>
       <div class="paragraph step-content">
         <span class="bold"
-          >Step 1: Confirm that the address below is your new BCNA (Cosmos)
+          >Step 1: Confirm that the address below is your new ENCI (Cosmos)
           address</span
         >
         (see top left corner in the web wallet) to receive your
-        <span class="bold">new</span> BCNA coins.
+        <span class="bold">new</span> ENCI coins.
       </div>
       <div class="session-main bottom-indent">
         <CommonField
@@ -69,11 +69,11 @@
     <div class="session-container">
       <div class="paragraph content">
         Below, you’ll find a unique deposit address generated on the
-        <span class="bold">old</span> BitCanna blockchain.
+        <span class="bold">old</span> Enci blockchain.
       </div>
       <div class="paragraph content">
-        To receive your new BCNA coins, you must send your
-        <span class="bold">old</span> BCNA coins to this unique
+        To receive your new ENCI coins, you must send your
+        <span class="bold">old</span> ENCI coins to this unique
         <span class="bold">(old)</span> deposit address.
       </div>
       <div class="paragraph content">
@@ -82,11 +82,11 @@
       </div>
       <div class="paragraph step-content">
         <span class="bold"
-          >Step 2: Send your old BCNA coins to the unique deposit address
+          >Step 2: Send your old ENCI coins to the unique deposit address
           below.</span
         ><br />
         Once you have sent your coins, you’ll receive the
-        <span class="bold">new</span> BCNA coins in the web wallet
+        <span class="bold">new</span> ENCI coins in the web wallet
         <span class="bold">within 10 minutes</span>.
       </div>
       <div class="copyable-bitcoin-address">
@@ -124,13 +124,13 @@
 
       <div class="paragraph content">
         Click the “View address” button to track if your coins have been
-        received on your <span class="bold">new</span> BCNA address.
+        received on your <span class="bold">new</span> ENCI address.
       </div>
 
       <div class="paragraph content support">
         Haven’t received anything after 10 minutes? Contact us at
         <a href="mailto:support@bitcanna.io">support@bitcanna.io</a>; make sure
-        to provide your new BCNA address, and/or your transaction hash. (You can
+        to provide your new ENCI address, and/or your transaction hash. (You can
         copy the address by clicking on the address in the top left corner of
         your web wallet)
       </div>
