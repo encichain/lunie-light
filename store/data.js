@@ -31,7 +31,6 @@ export const state = () => ({
   taxRateLoaded: false,
   burnRate: [],
   burnRateLoaded: false,
-  validatorInfoPage: [],
   enciApr: [],
   enciAprLoaded: false,
 })
@@ -82,7 +81,6 @@ export const actions = {
       dispatch('refreshSession'),
       dispatch('getProposals'),
       dispatch('getGovernanceOverview'),
-      dispatch('getValidatorInfoPage'),
       dispatch('getTaxRate'),
       dispatch('getBurnRate'),
       dispatch('getEnciApr')
@@ -206,22 +204,6 @@ export const actions = {
         { root: true }
       )
     }
-  },
-  async getValidatorInfoPage({ commit, dispatch, state: { api } }) {
-    try {
-      const validators = await api.getValidatorInfoPage()
-      commit('setValidatorInfoPage', validators.data.staking_pool[0])
-    } catch (err) {
-      commit(
-        'notifications/add',
-        {
-          type: 'danger',
-          message: 'Getting validators failed:' + err.message,
-        },
-        { root: true }
-      )
-    }
-    dispatch('updateValidatorImages')
   },
   async getValidators({ commit, dispatch, state: { api } }) {
     try {

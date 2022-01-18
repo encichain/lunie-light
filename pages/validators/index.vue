@@ -83,7 +83,6 @@ export default {
       'delegations',
       'delegationsLoaded',
       'rewards',
-      'validatorInfoPage',
       'taxRate',
       'burnRate',
     ]),
@@ -107,10 +106,6 @@ export default {
       } else {
         return this.validators.filter(({ status }) => status === 'ACTIVE')
       }
-    },
-    finalBonded() {
-      const boundedRound = this.validatorInfoPage.bonded_tokens / 1000000
-      return boundedRound.toFixed(0)
     },
     finaltaxRate() {
       const taxRatePercent = this.taxRate.tax_rate

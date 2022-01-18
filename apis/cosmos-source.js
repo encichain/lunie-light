@@ -200,14 +200,6 @@ export default class CosmosAPI {
     return await this.query(`enci/charity/v1beta1/burnrate`)
   }
 
- // async getValidatorInfoPage() {
- //   return await this.axios(`https://graphql.bitcanna.io/api/rest/supply/bonded`)
- // }
-
-  async getBcnaInflation() {
-    return await this.axios(`https://graphql.bitcanna.io/api/rest/supply/inflation`)
-  }
-
   async getValidator(address) {
     await this.dataReady
     return this.validators[address]
