@@ -29,19 +29,19 @@ export default {
       {
         rel: 'icon',
         type: 'image/x-icon',
-        href: '/cropped-apple-touch-icon-32x32.png',
+        href: '/enci-32x32.png',
         sizes: '32x32',
       },
       {
         rel: 'icon',
         type: 'image/x-icon',
-        href: '/cropped-apple-touch-icon-192x192.png',
+        href: '/enci-192x192.png',
         sizes: '192x192',
       },
       {
         rel: 'apple-touch-icon',
         type: 'image/x-icon',
-        href: '/cropped-apple-touch-icon-180x180.png',
+        href: '/enci-180x180.png',
       },
     ],
   },

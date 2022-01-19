@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Welcome to Enci</h1>
+    <h1>Enci Wallet</h1>
     <h2>{{ network.description }}</h2>
     <div class="session-list">
       <AddressLiSession
