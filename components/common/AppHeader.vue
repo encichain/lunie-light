@@ -174,7 +174,7 @@ export default {
   .app-header > .container {
     position: fixed;
     height: 100%;
-    background: var(--app-nav);
+    background: black;
   }
 }
 </style>

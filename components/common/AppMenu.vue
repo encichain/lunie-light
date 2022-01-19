@@ -120,7 +120,7 @@ export default {
 }
 
 .app-menu .app-menu-item.nuxt-link-active {
-  background: var(--app-nav-hover);
+  background: var(--app-nav);
   color: var(--white);
 }
 
