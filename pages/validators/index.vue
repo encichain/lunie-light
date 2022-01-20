@@ -239,4 +239,15 @@ export default {
 .filter-toggle {
   margin-left: 1em;
 }
+
+@media screen and (max-width: 1023px) {
+  .data-row {
+    flex-direction: column;
+  }
+
+  .data-row > div {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+}
 </style>
