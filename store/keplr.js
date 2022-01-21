@@ -98,11 +98,11 @@ export const actions = {
           // If this field is not provided, Keplr extension will set the default gas price as (low: 0.01, average: 0.025, high: 0.04).
           // Currently, Keplr doesn't support dynamic calculation of the gas prices based on on-chain data.
           // Make sure that the gas prices are higher than the minimum gas prices accepted by chain validators and RPC/REST endpoint.
-          // gasPriceStep: {
-          //     low: 0.01,
-          //     average: 0.025,
-          //     high: 0.04
-          // }
+          gasPriceStep: {
+            low: 0.03,
+            average: 1,
+            high: 2,
+          },
         })
         await window.keplr.enable(block.chainId)
 

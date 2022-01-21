@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 // Update version for using version 0.44.0 of the cosmos sdk / keplr
 import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing'
 import {
@@ -33,7 +35,7 @@ export function getFees(transactionType, feeDenom) {
   const fee = {
     amount: [
       {
-        denom: 'ubcna',
+        denom: 'uenci',
         amount: '5000',
       },
     ],
@@ -57,7 +59,8 @@ export async function createSignBroadcast({
   ledgerTransport,
 }) {
   const feeData = getFees(messageType, feeDenom)
-
+  // Remove
+  // console.log(message)
   if (signingType !== 'extension') {
     const signer = await getSigner(
       signingType,
@@ -68,16 +71,18 @@ export async function createSignBroadcast({
       chainId,
       ledgerTransport
     )
-    // console.log(message)
     switch (messageType) {
+      // Message structure: { amounts: [{ amount: "", denom: ""}], to: "", from: ""}
       case 'SendTx':
         try {
-          const finalAmout = (message.amounts[0].amount * 1000000).toString()
-          const getTx = await sendTxBcna(
+          let sendDenoms = network.getCoinLookup(message.amounts[0].denom, 'viewDenom')
+          const finalAmount = (message.amounts[0].amount * 1000000).toString()
+          const getTx = await sendTx(
             signer,
             senderAddress,
             message.to[0],
-            finalAmout,
+            sendDenoms.chainDenom,
+            finalAmount,
             feeData,
             memo,
             signingType
@@ -88,14 +93,17 @@ export async function createSignBroadcast({
         } catch (err) {
           throw new Error(err)
         }
+      // Message structure: { amount : {amount: "", denom: ""}, to: ""}
       case 'StakeTx':
         try {
-          const finalAmout = (message.amount.amount * 1000000).toString()
-          const getTx = await delegateTokensBcna(
+          let sendDenoms = network.getCoinLookup(message.amount.denom, 'viewDenom')
+          const finalAmount = (message.amount.amount * 1000000).toString()
+          const getTx = await delegateTokens(
             signer,
             senderAddress,
             message.to[0],
-            finalAmout,
+            sendDenoms.chainDenom,
+            finalAmount,
             feeData,
             signingType
           )
@@ -105,14 +113,17 @@ export async function createSignBroadcast({
         } catch (err) {
           throw new Error(err)
         }
+      // Message structure: { amount : {amount: "", denom: ""}, from: ""}
       case 'UnstakeTx':
         try {
-          const finalAmout = (message.amount.amount * 1000000).toString()
-          const getTx = await unDelegateTokensBcna(
+          let sendDenoms = network.getCoinLookup(message.amount.denom, 'viewDenom')
+          const finalAmount = (message.amount.amount * 1000000).toString()
+          const getTx = await unDelegateTokens(
             signer,
             message.from[0],
             senderAddress,
-            finalAmout,
+            sendDenoms.chainDenom,
+            finalAmount,
             feeData,
             signingType
           )
@@ -122,15 +133,18 @@ export async function createSignBroadcast({
         } catch (err) {
           throw new Error(err)
         }
+      // Message structure: { amount : {amount: "", denom: ""}, from: "", to: ""}
       case 'RestakeTx':
         try {
-          const finalAmout = (message.amount.amount * 1000000).toString()
-          const getTx = await ReDelegateTokensBcna(
+          let sendDenoms = network.getCoinLookup(message.amount.denom, 'viewDenom')
+          const finalAmount = (message.amount.amount * 1000000).toString()
+          const getTx = await ReDelegateTokens(
             signer,
             message.delegator[0],
             message.from[0],
             message.to[0],
-            finalAmout,
+            sendDenoms.chainDenom,
+            finalAmount,
             feeData,
             signingType
           )
@@ -142,7 +156,7 @@ export async function createSignBroadcast({
         }
       case 'ClaimRewardsTx':
         try {
-          const getTx = await rewardBcna(
+          const getTx = await reward(
             signer,
             senderAddress,
             message.from,
@@ -157,7 +171,7 @@ export async function createSignBroadcast({
         }
       case 'VoteTx':
         try {
-          const getTx = await voteTxBcna(
+          const getTx = await voteTx(
             signer,
             senderAddress,
             message.proposalId,
@@ -177,11 +191,12 @@ export async function createSignBroadcast({
   }
 }
 
-async function sendTxBcna(
+async function sendTx(
   sign,
   addFrom,
   addTo,
-  amountBcna,
+  coinDenom,
+  coinAmount,
   fee,
   memo,
   signingType
@@ -199,9 +214,10 @@ async function sendTxBcna(
     network.rpcURL,
     wallet
   )
+
   const amount = {
-    denom: 'ubcna',
-    amount: amountBcna,
+    denom: coinDenom,
+    amount: coinAmount,
   }
 
   const result = await client.sendTokens(addFrom, addTo, [amount], fee, memo)
@@ -209,7 +225,7 @@ async function sendTxBcna(
 
   return result
 }
-async function rewardBcna(sign, addFrom, addTo, fee, signingType) {
+async function reward(sign, addFrom, addTo, fee, signingType) {
   let wallet = ''
   if (signingType === 'local') {
     wallet = await DirectSecp256k1HdWallet.fromMnemonic(sign.secret.data, {
@@ -241,11 +257,12 @@ async function rewardBcna(sign, addFrom, addTo, fee, signingType) {
   return result
 }
 
-async function delegateTokensBcna(
+async function delegateTokens(
   sign,
   addFrom,
   addTo,
-  amountBcna,
+  coinDenom,
+  coinAmount,
   fee,
   signingType
 ) {
@@ -264,8 +281,8 @@ async function delegateTokensBcna(
   )
 
   const amount = {
-    denom: 'ubcna',
-    amount: amountBcna,
+    denom: coinDenom,
+    amount: coinAmount,
   }
 
   const result = await client.delegateTokens(
@@ -278,11 +295,12 @@ async function delegateTokensBcna(
   assertIsBroadcastTxSuccess(result)
   return result
 }
-async function unDelegateTokensBcna(
+async function unDelegateTokens(
   sign,
   validator,
   fromDel,
-  amountBcna,
+  coinDenom,
+  coinAmount,
   fee,
   signingType
 ) {
@@ -301,8 +319,8 @@ async function unDelegateTokensBcna(
   )
 
   const amount = {
-    denom: 'ubcna',
-    amount: amountBcna,
+    denom: coinDenom,
+    amount: coinAmount,
   }
 
   const result = await client.undelegateTokens(
@@ -315,12 +333,13 @@ async function unDelegateTokensBcna(
   assertIsBroadcastTxSuccess(result)
   return result
 }
-async function ReDelegateTokensBcna(
+async function ReDelegateTokens(
   sign,
   delegator,
   valFrom,
   valTo,
-  amountBcna,
+  coinDenom,
+  coinAmount,
   fee,
   signingType
 ) {
@@ -339,8 +358,8 @@ async function ReDelegateTokensBcna(
   )
 
   const amountFinal = {
-    denom: 'ubcna',
-    amount: amountBcna,
+    denom: coinDenom,
+    amount: coinAmount,
   }
   const MsgBeginRedelegate = defaultRegistryTypes[8][1] // MsgBeginRedelegate
   const reDelegateMsg = {
@@ -357,7 +376,7 @@ async function ReDelegateTokensBcna(
   return result
 }
 
-async function voteTxBcna(sign, fromDel, proposalId, vote, fee, signingType) {
+async function voteTx(sign, fromDel, proposalId, vote, fee, signingType) {
   let wallet = ''
   if (signingType === 'local') {
     wallet = await DirectSecp256k1HdWallet.fromMnemonic(sign.secret.data, {
