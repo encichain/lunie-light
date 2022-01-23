@@ -192,7 +192,7 @@ export default {
         isValidatorAddress: () => {
           if (
             this.to !== null &&
-            this.to.startsWith(network.validatorAddressPrefix, 'valoper')
+            this.to.startsWith(network.validatorAddressPrefix + 'valoper')
           ) {
             return true
           } else {

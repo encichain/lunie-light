@@ -59,8 +59,6 @@ export async function createSignBroadcast({
   ledgerTransport,
 }) {
   const feeData = getFees(messageType, feeDenom)
-  // Remove
-  // console.log(message)
   if (signingType !== 'extension') {
     const signer = await getSigner(
       signingType,
@@ -241,8 +239,7 @@ async function reward(sign, addFrom, addTo, fee, signingType) {
     wallet
   )
 
-  const WithdrawDelegatorReward = defaultRegistryTypes[3][1] // MsgWithdrawDelegatorReward
-  // console.log(WithdrawDelegatorReward)
+  const WithdrawDelegatorReward = defaultRegistryTypes[3][1] // MsgWithdrawDelegatorReward)
   const copieDelegator = []
   addTo.forEach(function (item) {
     copieDelegator.push({
