@@ -190,7 +190,10 @@ export default {
       to: {
         required,
         isValidatorAddress: () => {
-          if (this.to !== null && this.to.startsWith('bcnavaloper')) {
+          if (
+            this.to !== null &&
+            this.to.startsWith(network.validatorAddressPrefix, 'valoper')
+          ) {
             return true
           } else {
             return false
@@ -205,7 +208,6 @@ export default {
     },
     validateForm() {
       this.$v.$touch()
-      console.log(this.$v.$invalid)
       return !this.$v.$invalid
     },
     clear() {
