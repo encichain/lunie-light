@@ -3,7 +3,7 @@
 // Update version for using version 0.44.0 of the cosmos sdk / keplr
 import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing'
 import {
-  assertIsBroadcastTxSuccess,
+  assertIsDeliverTxSuccess,
   SigningStargateClient,
   defaultRegistryTypes,
 } from '@cosmjs/stargate'
@@ -221,7 +221,8 @@ async function sendTx(
   }
 
   const result = await client.sendTokens(addFrom, addTo, [amount], fee, memo)
-  assertIsBroadcastTxSuccess(result)
+  
+  assertIsDeliverTxSuccess(result)
 
   return result
 }
@@ -253,7 +254,7 @@ async function reward(sign, addFrom, addTo, fee, signingType) {
     })
   })
   const result = client.signAndBroadcast(addFrom, copieDelegator, fee, '')
-  assertIsBroadcastTxSuccess(result)
+  assertIsDeliverTxSuccess(result)
   return result
 }
 
@@ -292,7 +293,7 @@ async function delegateTokens(
     fee,
     'Delegated from WebWallet'
   )
-  assertIsBroadcastTxSuccess(result)
+  assertIsDeliverTxSuccess(result)
   return result
 }
 async function unDelegateTokens(
@@ -330,7 +331,7 @@ async function unDelegateTokens(
     fee,
     'Undelegate from Enci WebWallet'
   )
-  assertIsBroadcastTxSuccess(result)
+  assertIsDeliverTxSuccess(result)
   return result
 }
 async function ReDelegateTokens(
@@ -372,7 +373,7 @@ async function ReDelegateTokens(
     }),
   }
   const result = client.signAndBroadcast(delegator, [reDelegateMsg], fee, '')
-  assertIsBroadcastTxSuccess(result)
+  assertIsDeliverTxSuccess(result)
   return result
 }
 
@@ -416,7 +417,7 @@ async function voteTx(sign, fromDel, proposalId, vote, fee, signingType) {
     fee,
     'Voted from Enci WebWallet'
   )
-  assertIsBroadcastTxSuccess(result)
+  assertIsDeliverTxSuccess(result)
   return result
 }
 
