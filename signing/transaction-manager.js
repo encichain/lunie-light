@@ -155,7 +155,7 @@ export async function createSignBroadcast({
         }
       case 'ClaimRewardsTx':
         try {
-          const getTx = await reward(
+          const getTx = await collectRewards(
             signer,
             senderAddress,
             message.from,
@@ -244,7 +244,7 @@ async function sendTx(
 
   return result
 }
-async function reward(sign, addFrom, addTo, fee, signingType) {
+async function collectRewards(sign, delegatorAddr, validatorAddr, fee, signingType) {
   let wallet = ''
   if (signingType === 'local') {
     wallet = await DirectSecp256k1HdWallet.fromMnemonic(sign.secret.data, {
@@ -258,19 +258,21 @@ async function reward(sign, addFrom, addTo, fee, signingType) {
     network.rpcURL,
     wallet
   )
-
+  
   const WithdrawDelegatorReward = defaultRegistryTypes[3][1] // MsgWithdrawDelegatorReward)
-  const copieDelegator = []
-  addTo.forEach(function (item) {
-    copieDelegator.push({
+  const copyDelegators = []
+  validatorAddr.forEach(function (item) {
+    copyDelegators.push({
       typeUrl: '/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward',
       value: WithdrawDelegatorReward.fromPartial({
-        delegatorAddress: addFrom,
+        delegatorAddress: delegatorAddr,
         validatorAddress: item,
       }),
     })
   })
-  const result = client.signAndBroadcast(addFrom, copieDelegator, fee, '')
+
+  const result = client.signAndBroadcast(delegatorAddr, copyDelegators, fee)
+  
   assertIsDeliverTxSuccess(result)
   return result
 }
@@ -433,14 +435,21 @@ async function depositTx(
       amount: amountFinal,
     })
   }
-  
-  const response = client.signAndBroadcast(depositor, [depositMsg], fee, '')
+
+  const response = client.signAndBroadcast(depositor, [depositMsg], fee)
   assertIsDeliverTxSuccess(response)
 
   return response
 }
 
-async function voteTx(sign, fromDel, proposalId, vote, fee, signingType) {
+async function voteTx(
+  sign,
+  voterAddr,
+  proposalId,
+  vote,
+  fee,
+  signingType
+) {
   let wallet = ''
   if (signingType === 'local') {
     wallet = await DirectSecp256k1HdWallet.fromMnemonic(sign.secret.data, {
@@ -449,7 +458,6 @@ async function voteTx(sign, fromDel, proposalId, vote, fee, signingType) {
   } else {
     wallet = sign
   }
-
   const client = await SigningStargateClient.connectWithSigner(
     network.rpcURL,
     wallet
@@ -473,15 +481,23 @@ async function voteTx(sign, fromDel, proposalId, vote, fee, signingType) {
       finalVote = '0'
   }
 
-  const result = await client.voteProposale(
-    fromDel,
-    proposalId,
-    finalVote,
-    fee,
-    'Voted from Enci WebWallet'
-  )
-  assertIsDeliverTxSuccess(result)
-  return result
+  const MsgVote = defaultRegistryTypes[7][1] // MsgVote from SigningStargateClient
+
+  const voteMsg = {
+    typeUrl: `/cosmos.gov.v1beta1.MsgVote`,
+    value: MsgVote.fromPartial(
+      {
+        proposalId: proposalId,
+        voter: voterAddr,
+        option: finalVote,
+      }
+  )}
+
+  const response = client.signAndBroadcast(voterAddr, [voteMsg], fee)
+
+  assertIsDeliverTxSuccess(response)
+  
+  return response
 }
 
 export async function pollTxInclusion(txHash, iteration = 0) {
