@@ -98,6 +98,7 @@ export default {
     network,
   }),
   computed: {
+    ...mapState([`session`]),
     ...mapState(`data`, [`balances`]),
     balance() {
       console.log(
@@ -114,17 +115,22 @@ export default {
       return this.balance.available
     },
     transactionData() {
-      if (isNaN(this.amount) || !this.proposalId || !this.denom) {
+      if (
+        isNaN(this.amount) ||
+        !this.proposalId ||
+        !this.denom ||
+        !this.session
+      ) {
         return {}
       }
       return {
         type: lunieMessageTypes.DEPOSIT,
         proposalId: this.proposalId,
+        depositor: this.session.address,
         amount: {
           amount: this.amount,
           denom: this.denom,
         },
-        depositsCount: this.deposits.length,
       }
     },
     notifyMessage() {

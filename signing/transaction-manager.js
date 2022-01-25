@@ -6,6 +6,7 @@ import {
   assertIsDeliverTxSuccess,
   SigningStargateClient,
   defaultRegistryTypes,
+  StargateClient,
 } from '@cosmjs/stargate'
 import BigNumber from 'bignumber.js'
 import { getSigner } from './signer'
@@ -164,6 +165,25 @@ export async function createSignBroadcast({
           return {
             hash: getTx.transactionHash,
           }
+        } catch (err) {
+          throw new Error(err)
+        }
+      case 'DepositTx':
+        try {
+          let sendDenoms = network.getCoinLookup(message.amount.denom, 'viewDenom')
+          const finalAmount = (message.amount.amount * 1000000).toString()
+          const getTx = await depositTx(
+            signer,
+            message.proposalId,
+            message.depositor,
+            sendDenoms.chainDenom,
+            finalAmount,
+            feeData,
+            signingType
+          )
+          return {
+            hash: getTx.transactionHash,
+          } 
         } catch (err) {
           throw new Error(err)
         }
@@ -360,6 +380,7 @@ async function ReDelegateTokens(
     amount: coinAmount,
   }
   const MsgBeginRedelegate = defaultRegistryTypes[8][1] // MsgBeginRedelegate
+
   const reDelegateMsg = {
     typeUrl: '/cosmos.staking.v1beta1.MsgBeginRedelegate',
     value: MsgBeginRedelegate.fromPartial({
@@ -372,6 +393,51 @@ async function ReDelegateTokens(
   const result = client.signAndBroadcast(delegator, [reDelegateMsg], fee, '')
   assertIsDeliverTxSuccess(result)
   return result
+}
+
+async function depositTx(
+  sign,
+  proposalId,
+  depositor,
+  coinDenom,
+  coinAmount,
+  fee,
+  signingType
+) {
+  let wallet = ''
+  if (signingType == 'local') {
+    wallet = await DirectSecp256k1HdWallet.fromMnemonic(sign.secret.data, {
+      prefix: network.addressPrefix
+    })
+  } else {
+    wallet = sign
+  }
+
+  const client = await SigningStargateClient.connectWithSigner(
+    network.rpcURL,
+    wallet
+  )
+
+  const amountFinal = [{
+    denom: coinDenom,
+    amount: coinAmount
+  }]
+
+  const MsgDeposit = defaultRegistryTypes[5][1] // MsgDeposit from SigningStargateClient
+  
+  const depositMsg = {
+    typeUrl: `/cosmos.gov.v1beta1.MsgDeposit`,
+    value: MsgDeposit.fromPartial({
+      proposalId: proposalId,
+      depositor: depositor,
+      amount: amountFinal,
+    })
+  }
+  
+  const response = client.signAndBroadcast(depositor, [depositMsg], fee, '')
+  assertIsDeliverTxSuccess(response)
+
+  return response
 }
 
 async function voteTx(sign, fromDel, proposalId, vote, fee, signingType) {
