@@ -492,9 +492,10 @@ export function proposalReducer(
   return {
     id: Number(proposal.proposal_id),
     proposalId: String(proposal.proposal_id),
-    type: proposalTypeEnumDictionary[proposal.content["@type"].split('/')[1]],
+    type: proposalTypeEnumDictionary[proposal.content["@type"].split('.')[3]],
     title: proposal.content.title,
     description: proposal.content.description,
+    changes: proposal.content.changes,
     creationTime: proposal.submit_time,
     status: proposal.status,
     statusBeginTime: proposalBeginTime(proposal),
@@ -502,7 +503,7 @@ export function proposalReducer(
     tally: tallyReducer(proposal, detailedVotes.tally, totalBondedTokens),
     deposit: getDeposit(proposal),
     summary: getProposalSummary(
-      proposalTypeEnumDictionary[proposal.content["@type"].split('/')[1]]
+      proposalTypeEnumDictionary[proposal.content["@type"].split('.')[3]]
     ),
     detailedVotes,
   }
