@@ -251,6 +251,8 @@ const proposalTypeEnumDictionary = {
   TextProposal: 'TEXT',
   CommunityPoolSpendProposal: 'TREASURY',
   ParameterChangeProposal: 'PARAMETER_CHANGE',
+  SoftwareUpgradeProposal: 'UPGRADE',
+  CancelSoftwareUpgrade: 'CANCEL_UPGRADE',
 }
 
 // map Cosmos SDK message types to Lunie message types
@@ -496,6 +498,7 @@ export function proposalReducer(
     title: proposal.content.title,
     description: proposal.content.description,
     changes: proposal.content.changes,
+    plan: proposal.content.plan,
     creationTime: proposal.submit_time,
     status: proposal.status,
     statusBeginTime: proposalBeginTime(proposal),

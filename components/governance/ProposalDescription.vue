@@ -7,6 +7,7 @@
       <h4>Description</h4>
       <div class="description">
         <pre>{{ proposal.description }}</pre>
+        <pre>{{ proposal }}</pre>
       </div>
     </section>
   </div>
