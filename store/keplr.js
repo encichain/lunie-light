@@ -51,11 +51,13 @@ export const actions = {
           rpc: network.rpcURL,
           // REST endpoint of the chain.
           rest: network.apiURL,
+          // Features - legacy TXs disabled
+          features: ['stargate', 'no-legacy-stdTx'],
           // Staking coin information
           stakeCurrency: lunieCoinToKeplrCoin(network.stakingDenom),
           // (Optional) If you have a wallet webpage used to stake the coin then provide the url to the website in `walletUrlForStaking`.
           // The 'stake' button in Keplr extension will link to the webpage.
-          // walletUrlForStaking: "",
+          walletUrlForStaking: `http://localhost:3000/validators`,
           // The BIP44 path.
           bip44: {
             // You can only set the coin type of BIP44.
@@ -88,6 +90,7 @@ export const actions = {
           feeCurrencies: network.coinLookup.map(({ viewDenom }) =>
             lunieCoinToKeplrCoin(viewDenom)
           ),
+
           // (Optional) The number of the coin type.
           // This field is only used to fetch the address from ENS.
           // Ideally, it is recommended to be the same with BIP44 path's coin type.
@@ -107,14 +110,12 @@ export const actions = {
         await window.keplr.enable(block.chainId)
 
         const offlineSigner = await window.getOfflineSignerAuto(block.chainId)
-
         // You can get the address/public keys by `getAccounts` method.
         // It can return the array of address/public key.
         // But, currently, Keplr extension manages only one address/public key pair.
         // XXX: This line is needed to set the sender address for SigningCosmosClient.
         const accounts = await offlineSigner.getAccounts()
         commit('setAccounts', accounts)
-
         commit('setInitialized')
       } catch (error) {
         commit('setLoading', false)
