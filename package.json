@@ -6,7 +6,7 @@
     "dev": "nuxt",
     "analyze": "nuxt build -a",
     "build": "nuxt build",
-    "start": "nuxt start --port 3000",
+    "start": "nuxt start --port 3002",
     "generate": "nuxt generate",
     "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "lint:style": "stylelint **/*.{vue,css} --ignore-path .gitignore",
