@@ -19,6 +19,7 @@ jobs:
             git clone https://${{ secrets.GIT_USERNAME }}:${{ secrets.GIT_PAT }}@github.com/encichain/lunie-light.git lunie-light-build
             cd lunie-light-build
             yarn install
+            yarn build
             cd ~/Desktop/
             rm "lunie-light"
             mv lunie-light-build lunie-light
@@ -26,4 +27,4 @@ jobs:
             cd lunie-light
             pm2 stop "lunie-light"
             pm2 delete "lunie-light"
-            pm2 start yarn --name "lunie-light" -- start
+            pm2 start yarn --interpreter bash --name "lunie-light" -- start
