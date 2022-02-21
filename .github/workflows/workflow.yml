@@ -1,0 +1,29 @@
+name: Lunie-light
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        uses: appleboy/ssh-action@v0.1.2
+        with:
+          host: ${{secrets.SSH_HOST}}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            cd ~/Desktop/
+            git clone https://${{ secrets.GIT_USERNAME }}:${{ secrets.GIT_PAT }}@github.com/encichain/lunie-light.git lunie-light-build
+            cd lunie-light-build
+            yarn install
+            cd ~/Desktop/
+            rm "lunie-light"
+            mv lunie-light-build lunie-light
+            rm lunie-light-build
+            cd lunie-light
+            pm2 stop "lunie-light"
+            pm2 delete "lunie-light"
+            pm2 start yarn --name "lunie-light" -- start
