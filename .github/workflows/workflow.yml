@@ -21,9 +21,9 @@ jobs:
             yarn install
             yarn build
             cd ~/Desktop/
-            rm "lunie-light"
+            rm -r lunie-light
             mv lunie-light-build lunie-light
-            rm lunie-light-build
+            rm -r lunie-light-build
             cd lunie-light
             pm2 stop "lunie-light"
             pm2 delete "lunie-light"
